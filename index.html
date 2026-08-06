@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
+  <title>PromiseTech Academy · Certified Affiliate & AI Creator</title>
+  <!-- Bootstrap 5 + Font Awesome 6 (Free) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Google Font: Poppins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #0b0d15;
+      color: #eef2f7;
+      overflow-x: hidden;
+    }
+    .glass {
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 24px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+    }
+    .gradient-primary {
+      background: linear-gradient(145deg, #0A84FF, #0066cc);
+      color: #fff;
+      border: none;
+    }
+    .gradient-secondary {
+      background: linear-gradient(145deg, #00C853, #009624);
+      color: #fff;
+      border: none;
+    }
+    .btn-glow {
+      transition: all 0.25s ease;
+      box-shadow: 0 0 15px rgba(10, 132, 255, 0.3);
+    }
+    .btn-glow:hover {
+      transform: scale(1.02);
+      box-shadow: 0 0 30px rgba(10, 132, 255, 0.6);
+    }
+    .text-primary-custom { color: #0A84FF; }
+    .text-secondary-custom { color: #00C853; }
+    .bg-dark-card {
+      background: rgba(18, 22, 34, 0.7);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.03);
+    }
+    .floating-ai {
+      position: absolute;
+      font-size: 6rem;
+      opacity: 0.08;
+      pointer-events: none;
+      z-index: 0;
+      animation: floatGlow 12s infinite alternate ease-in-out;
+    }
+    @keyframes floatGlow {
+      0% { transform: translateY(0px) scale(1) rotate(0deg); opacity: 0.05; }
+      100% { transform: translateY(-40px) scale(1.1) rotate(6deg); opacity: 0.15; }
+    }
+    .hero-section {
+      position: relative;
+      overflow: hidden;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      background: radial-gradient(circle at 20% 30%, #0f1a2e, #070a12);
+    }
+    .hero-section .container { position: relative; z-index: 2; }
+    .trust-badge {
+      background: rgba(0, 200, 83, 0.15);
+      padding: 0.4rem 1.2rem;
+      border-radius: 60px;
+      font-size: 0.85rem;
+      border-left: 3px solid #00C853;
+    }
+    .icon-card {
+      background: rgba(255,255,255,0.02);
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255,255,255,0.04);
+      border-radius: 20px;
+      padding: 1.5rem 1rem;
+      transition: 0.3s;
+      height: 100%;
+    }
+    .icon-card:hover {
+      transform: translateY(-8px);
+      background: rgba(10, 132, 255, 0.08);
+      border-color: #0A84FF;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    }
+    .icon-card i { font-size: 2.4rem; color: #0A84FF; }
+    .timeline-step {
+      position: relative;
+      padding-left: 2rem;
+      border-left: 3px solid #0A84FF;
+      margin-bottom: 2.2rem;
+    }
+    .timeline-step:last-child { border-left: 3px solid transparent; }
+    .timeline-step .step-number {
+      position: absolute;
+      left: -14px;
+      top: -6px;
+      background: #0A84FF;
+      width: 28px;
+      height: 28px;
+      border-radius: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+    .testimonial-card {
+      background: rgba(255,255,255,0.03);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255,255,255,0.04);
+      border-radius: 24px;
+      padding: 1.8rem 1.5rem;
+      transition: 0.3s;
+    }
+    .testimonial-card:hover { background: rgba(10, 132, 255, 0.06); }
+    .testimonial-card img {
+      width: 60px;
+      height: 60px;
+      border-radius: 100px;
+      object-fit: cover;
+      border: 3px solid #0A84FF;
+    }
+    .pricing-card {
+      background: rgba(255,255,255,0.02);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(10, 132, 255, 0.2);
+      border-radius: 40px;
+      padding: 2.5rem 2rem;
+      max-width: 420px;
+      margin: 0 auto;
+    }
+    .pricing-card .price { font-size: 3.8rem; font-weight: 700; color: #00C853; }
+    .nav-sticky {
+      background: rgba(11, 13, 21, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255,255,255,0.03);
+      transition: 0.3s;
+    }
+    .nav-sticky .navbar-brand { font-weight: 700; letter-spacing: -0.3px; }
+    .section-title {
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      position: relative;
+    }
+    .section-title:after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 4px;
+      background: linear-gradient(90deg, #0A84FF, #00C853);
+      margin-top: 10px;
+      border-radius: 10px;
+    }
+    .faq-item {
+      background: rgba(255,255,255,0.02);
+      border-radius: 16px;
+      padding: 1rem 1.5rem;
+      margin-bottom: 0.8rem;
+      border-left: 4px solid #0A84FF;
+    }
+    .footer-links a {
+      color: #aab;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: 0.2s;
+    }
+    .footer-links a:hover { color: #0A84FF; }
+    .counter-number {
+      font-size: 2.6rem;
+      font-weight: 700;
+      color: #0A84FF;
+    }
+    /* result screenshot cards */
+    .result-card {
+      background: rgba(255,255,255,0.02);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 24px;
+      overflow: hidden;
+      transition: 0.3s;
+    }
+    .result-card:hover { transform: scale(1.01); border-color: #0A84FF; }
+    .result-card img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .result-card .card-body { padding: 1rem 1.2rem; }
+    .video-wrapper {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 */
+      height: 0;
+      border-radius: 28px;
+      overflow: hidden;
+      background: #000;
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+    .video-wrapper iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      border: 0;
+    }
+    /* student testimonial picture cards (4-up) */
+    .testimonial-pic-card {
+      background: rgba(255,255,255,0.02);
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 24px;
+      overflow: hidden;
+      transition: 0.3s;
+      text-align: center;
+    }
+    .testimonial-pic-card:hover { transform: translateY(-6px); border-color: #0A84FF; }
+    .testimonial-pic-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .testimonial-pic-card .card-body { padding: 1rem; }
+    @media (max-width: 768px) {
+      .hero-section { min-height: 100vh; padding: 2rem 0; }
+      .floating-ai { display: none; }
+      .pricing-card .price { font-size: 2.8rem; }
+      .testimonial-pic-card img { height: 160px; }
+    }
+    #loader {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: #0b0d15;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: opacity 0.6s;
+    }
+    #loader.hidden { opacity: 0; pointer-events: none; }
+    .loader-spinner {
+      width: 48px;
+      height: 48px;
+      border: 5px solid rgba(10,132,255,0.2);
+      border-top: 5px solid #0A84FF;
+      border-radius: 50%;
+      animation: spin 0.9s linear infinite;
+    }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+  <!-- LOADER -->
+  <div id="loader"><div class="loader-spinner"></div></div>
+
+  <!-- STICKY NAV -->
+  <nav class="navbar navbar-expand-lg nav-sticky fixed-top py-3">
+    <div class="container">
+      <a class="navbar-brand text-white fw-bold" href="#"><i class="fas fa-graduation-cap text-primary-custom me-2"></i>PROMISETECH</a>
+      <button class="navbar-toggler border-0 text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false">
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto gap-2 align-items-center">
+          <li class="nav-item"><a class="nav-link text-white-50" href="#courses">Courses</a></li>
+          <li class="nav-item"><a class="nav-link text-white-50" href="#results">Results</a></li>
+          <li class="nav-item"><a class="nav-link text-white-50" href="#video">Video Proof</a></li>
+          <li class="nav-item"><a class="nav-link text-white-50" href="#testimonials">Testimonials</a></li>
+          <li class="nav-item"><a class="btn btn-sm gradient-primary btn-glow px-4 rounded-pill text-white" href="#cta"><i class="fas fa-rocket me-1"></i>Enroll</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero-section pt-5">
+    <div class="floating-ai" style="top:10%; right:5%;"><i class="fas fa-microchip"></i></div>
+    <div class="floating-ai" style="bottom:15%; left:3%; font-size:4rem;"><i class="fas fa-robot"></i></div>
+    <div class="container pt-5 mt-4">
+      <div class="row g-5 align-items-center">
+        <div class="col-lg-7">
+          <h1 class="display-4 fw-bold lh-1 mb-4">Become a Certified Affiliate Marketer & AI Digital Product Creator</h1>
+          <p class="lead text-white-50 mb-4">Learn how to create digital products with AI, build professional websites, create high-converting landing pages, run Facebook Ads, and sell online—even if you're starting from scratch.</p>
+          <div class="d-flex flex-wrap gap-3 mb-4">
+            <span class="trust-badge"><i class="fas fa-check-circle text-secondary-custom me-2"></i>Beginner Friendly</span>
+            <span class="trust-badge"><i class="fas fa-infinity text-secondary-custom me-2"></i>Lifetime Access</span>
+            <span class="trust-badge"><i class="fas fa-mobile-alt text-secondary-custom me-2"></i>Learn From Phone or Laptop</span>
+            <span class="trust-badge"><i class="fas fa-tools text-secondary-custom me-2"></i>Practical Training</span>
+          </div>
+          <div class="d-flex flex-wrap gap-3">
+            <a href="#cta" class="btn gradient-primary btn-glow px-5 py-3 rounded-pill fw-semibold"><i class="fas fa-user-graduate me-2"></i>Enroll Now</a>
+            <a href="#" class="btn btn-outline-light px-5 py-3 rounded-pill fw-semibold border-2"><i class="fab fa-telegram me-2"></i>Contact Us on Telegram</a>
+          </div>
+        </div>
+        <div class="col-lg-5 d-none d-lg-block text-center">
+          <div class="glass p-4 position-relative">
+            <i class="fas fa-laptop-code" style="font-size: 8rem; color: #0A84FF; opacity: 0.5;"></i>
+            <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center">
+              <span class="badge bg-primary bg-opacity-25 p-3 rounded-pill"><i class="fas fa-sparkles me-1"></i> AI-Powered</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== NEW: YOUTUBE VIDEO PROOF (immediately after hero buttons) ======== -->
+  <section id="video" class="py-5">
+    <div class="container">
+      <div class="glass p-4 p-md-5">
+        <h2 class="section-title mb-3">🔥 Live Video Proof: How I Made 31 Million Naira</h2>
+        <p class="text-white-50 mb-4">Watch this real video testimonial where I break down exactly how I generated 31 million naira using the strategies taught inside PromiseTech Academy.</p>
+        <div class="video-wrapper">
+          <!-- Replace the src with your actual YouTube video ID -->
+          <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== NEW: 4 STUDENT TESTIMONIAL PICTURE SPOTS ======== -->
+  <section id="student-pics" class="py-5">
+    <div class="container">
+      <h2 class="section-title mb-5">Student Testimonial Gallery <span class="text-secondary-custom">📸</span></h2>
+      <div class="row g-4">
+        <div class="col-md-3 col-6"><div class="testimonial-pic-card"><img src="https://randomuser.me/api/portraits/men/45.jpg" alt="student testimonial 1"><div class="card-body"><p class="small text-white-50 mb-0"><i class="fas fa-quote-left text-primary-custom me-1"></i> “Life-changing training!”</p></div></div></div>
+        <div class="col-md-3 col-6"><div class="testimonial-pic-card"><img src="https://randomuser.me/api/portraits/women/68.jpg" alt="student testimonial 2"><div class="card-body"><p class="small text-white-50 mb-0"><i class="fas fa-quote-left text-primary-custom me-1"></i> “I launched my own agency.”</p></div></div></div>
+        <div class="col-md-3 col-6"><div class="testimonial-pic-card"><img src="https://randomuser.me/api/portraits/men/22.jpg" alt="student testimonial 3"><div class="card-body"><p class="small text-white-50 mb-0"><i class="fas fa-quote-left text-primary-custom me-1"></i> “Best investment in my career.”</p></div></div></div>
+        <div class="col-md-3 col-6"><div class="testimonial-pic-card"><img src="https://randomuser.me/api/portraits/women/33.jpg" alt="student testimonial 4"><div class="card-body"><p class="small text-white-50 mb-0"><i class="fas fa-quote-left text-primary-custom me-1"></i> “From zero to sales in weeks.”</p></div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ADMISSION NOTICE -->
+  <section class="py-5">
+    <div class="container">
+      <div class="glass p-4 p-md-5 row g-4 align-items-center">
+        <div class="col-md-8">
+          <h3 class="fw-bold"><i class="fas fa-graduation-cap text-primary-custom me-2"></i>🎓 2026 Student Registration Is Now Open</h3>
+          <p class="text-white-50">Applications are currently open for new students joining PROMISETECH ACADEMY. To activate your student account and gain access to the learning portal, an <strong class="text-secondary-custom">Activation Fee of ₦3,000</strong> is required. After successful activation, you'll receive your student dashboard, learning materials, and course access instructions.</p>
+        </div>
+        <div class="col-md-4 text-md-end">
+          <span class="badge bg-success bg-opacity-25 text-success p-3 fs-6 rounded-pill"><i class="fas fa-check-circle me-1"></i> Admission Status: OPEN</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT YOU WILL LEARN -->
+  <section id="courses" class="py-5">
+    <div class="container">
+      <h2 class="section-title mb-5">What You Will Learn</h2>
+      <div class="row g-4">
+        <div class="col-6 col-md-4 col-lg-3"><div class="icon-card text-center"><i class="fas fa-bullseye mb-2"></i><h6 class="fw-semibold">Module 1</h6><p class="small text-white-50">Affiliate Marketing From Scratch</p></div></div>
+        <div class="col-6 col-md-4 col-lg-3"><div class="icon-card text-center"><i class="fas fa-robot mb-2"></i><h6 class="fw-semibold">Module 2</h6><p class="small text-white-50">AI Digital Product Creation</p></div></div>
+        <div class="col-6 col-md-4 col-lg-3"><div class="icon-card text-center"><i class="fas fa-globe mb-2"></i><h6 class="fw-semibold">Module 3</h6><p class="small text-white-50">Website Creation</p></div></div>
+        <div class="col-6 col-md-4 col-lg-3"><div class="icon-card text-center"><i class="fas fa-paint-brush mb-2"></i><h6 class="fw-semibold">Module 4</h6><p class="small text-white-50">Landing Page Design</p></div></div>
+        <div class="col-6 col-md-4 col-lg-3"><div class="icon-card text-center"><i class="fab fa-facebook mb-2"></i><h6 class="fw-semibold">Module 5</h6><p class="small text-white-50">Facebook Advertising</p></div></div>
+        <div class="col-6 col-md-4 col-lg-3"><div class="icon-card text-center"><i class="fab fa-tiktok mb-2"></i><h6 class="fw-semibold">Module 6</h6><p class="small text-white-50">TikTok Advertising</p></div></div>
+        <div class="col-6 col-md-4 col-lg-3"><div class="icon-card text-center"><i class="fas fa-funnel-dollar mb-2"></i><h6 class="fw-semibold">Module 7</h6><p class="small text-white-50">Sales Funnel Creation</p></div></div>
+        <div class="col-6 col-md-4 col-lg-3"><div class="icon-card text-center"><i class="fas fa-video mb-2"></i><h6 class="fw-semibold">Module 8</h6><p class="small text-white-50">AI Video Creation</p></div></div>
+        <div class="col-6 col-md-4 col-lg-3"><div class="icon-card text-center"><i class="fas fa-chart-line mb-2"></i><h6 class="fw-semibold">Module 9</h6><p class="small text-white-50">Campaign Tracking</p></div></div>
+        <div class="col-6 col-md-4 col-lg-3"><div class="icon-card text-center"><i class="fas fa-rocket mb-2"></i><h6 class="fw-semibold">Module 10</h6><p class="small text-white-50">Scaling Your Online Business</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY STUDY WITH US + REGISTRATION PROCESS -->
+  <section class="py-5">
+    <div class="container">
+      <div class="row g-5">
+        <div class="col-md-6">
+          <h2 class="section-title mb-4">Why Study With Us</h2>
+          <div class="row g-3">
+            <div class="col-6"><div class="icon-card p-3"><i class="fas fa-chalkboard-teacher"></i><p class="fw-semibold mt-2 mb-0">Expert-Led Training</p></div></div>
+            <div class="col-6"><div class="icon-card p-3"><i class="fas fa-infinity"></i><p class="fw-semibold mt-2 mb-0">Lifetime Access</p></div></div>
+            <div class="col-6"><div class="icon-card p-3"><i class="fas fa-smile"></i><p class="fw-semibold mt-2 mb-0">Beginner Friendly</p></div></div>
+            <div class="col-6"><div class="icon-card p-3"><i class="fas fa-project-diagram"></i><p class="fw-semibold mt-2 mb-0">Real Projects</p></div></div>
+            <div class="col-6"><div class="icon-card p-3"><i class="fas fa-mobile-alt"></i><p class="fw-semibold mt-2 mb-0">Mobile Learning</p></div></div>
+            <div class="col-6"><div class="icon-card p-3"><i class="fas fa-certificate"></i><p class="fw-semibold mt-2 mb-0">Certificate</p></div></div>
+            <div class="col-6"><div class="icon-card p-3"><i class="fas fa-users"></i><p class="fw-semibold mt-2 mb-0">Private Community</p></div></div>
+            <div class="col-6"><div class="icon-card p-3"><i class="fas fa-sync-alt"></i><p class="fw-semibold mt-2 mb-0">Free Updates</p></div></div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <h2 class="section-title mb-4">Student Registration Process</h2>
+          <div class="timeline-step"><span class="step-number">1</span><h6>Complete Registration</h6></div>
+          <div class="timeline-step"><span class="step-number">2</span><h6>Activate Student Account</h6><span class="badge bg-secondary-custom bg-opacity-25 text-secondary-custom px-3 py-2 rounded-pill">Activation Fee: ₦3,000</span></div>
+          <div class="timeline-step"><span class="step-number">3</span><h6>Receive Login Details</h6></div>
+          <div class="timeline-step"><span class="step-number">4</span><h6>Access Student Dashboard</h6></div>
+          <div class="timeline-step"><span class="step-number">5</span><h6>Start Learning</h6></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COURSE BENEFITS -->
+  <section class="py-5">
+    <div class="container">
+      <h2 class="section-title mb-5">Course Benefits</h2>
+      <div class="row g-4">
+        <div class="col-6 col-lg-3"><div class="icon-card text-center"><i class="fas fa-map-pin"></i><p class="fw-semibold mt-2">Learn From Anywhere</p></div></div>
+        <div class="col-6 col-lg-3"><div class="icon-card text-center"><i class="fas fa-code"></i><p class="fw-semibold mt-2">No Coding Required</p></div></div>
+        <div class="col-6 col-lg-3"><div class="icon-card text-center"><i class="fas fa-brain"></i><p class="fw-semibold mt-2">AI Tools Included</p></div></div>
+        <div class="col-6 col-lg-3"><div class="icon-card text-center"><i class="fab fa-facebook"></i><p class="fw-semibold mt-2">Facebook Ads Strategy</p></div></div>
+        <div class="col-6 col-lg-3"><div class="icon-card text-center"><i class="fas fa-file-code"></i><p class="fw-semibold mt-2">Website Templates</p></div></div>
+        <div class="col-6 col-lg-3"><div class="icon-card text-center"><i class="fas fa-file-alt"></i><p class="fw-semibold mt-2">Landing Page Templates</p></div></div>
+        <div class="col-6 col-lg-3"><div class="icon-card text-center"><i class="fas fa-bullhorn"></i><p class="fw-semibold mt-2">Marketing Resources</p></div></div>
+        <div class="col-6 col-lg-3"><div class="icon-card text-center"><i class="fas fa-sync-alt"></i><p class="fw-semibold mt-2">Lifetime Updates</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STUDENT REAL RESULT SCREENSHOTS (4) -->
+  <section id="results" class="py-5">
+    <div class="container">
+      <h2 class="section-title mb-5">Student Real Results <span class="text-secondary-custom">📈</span></h2>
+      <div class="row g-4">
+        <div class="col-md-3 col-6"><div class="result-card"><img src="https://via.placeholder.com/400x300/0A84FF/FFFFFF?text=+Result+1" alt="student result 1"><div class="card-body"><p class="small text-white-50 mb-0"><i class="fas fa-trophy text-secondary-custom me-1"></i> Affiliate commission</p></div></div></div>
+        <div class="col-md-3 col-6"><div class="result-card"><img src="https://via.placeholder.com/400x300/00C853/FFFFFF?text=+Result+2" alt="student result 2"><div class="card-body"><p class="small text-white-50 mb-0"><i class="fas fa-chart-line text-secondary-custom me-1"></i> Sales dashboard</p></div></div></div>
+        <div class="col-md-3 col-6"><div class="result-card"><img src="https://via.placeholder.com/400x300/0A84FF/FFFFFF?text=+Result+3" alt="student result 3"><div class="card-body"><p class="small text-white-50 mb-0"><i class="fas fa-rocket text-secondary-custom me-1"></i> Digital product sales</p></div></div></div>
+        <div class="col-md-3 col-6"><div class="result-card"><img src="https://via.placeholder.com/400x300/00C853/FFFFFF?text=+Result+4" alt="student result 4"><div class="card-body"><p class="small text-white-50 mb-0"><i class="fas fa-dollar-sign text-secondary-custom me-1"></i> Revenue milestone</p></div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS (existing) -->
+  <section id="testimonials" class="py-5">
+    <div class="container">
+      <h2 class="section-title mb-5">What Our Students Say</h2>
+      <div class="row g-4">
+        <div class="col-md-4"><div class="testimonial-card"><div class="d-flex align-items-center gap-3 mb-3"><img src="https://randomuser.me/api/portraits/men/32.jpg" alt="student"><div><h6 class="mb-0">Chidi O.</h6><small class="text-white-50">Digital Marketer</small></div></div><p class="small text-white-50">“Practical training that actually works. I built my first landing page in 2 days. The AI tools module was a game changer.”</p></div></div>
+        <div class="col-md-4"><div class="testimonial-card"><div class="d-flex align-items-center gap-3 mb-3"><img src="https://randomuser.me/api/portraits/women/44.jpg" alt="student"><div><h6 class="mb-0">Amina K.</h6><small class="text-white-50">Content Creator</small></div></div><p class="small text-white-50">“The structured lessons helped me understand sales funnels and Facebook ads. I feel confident to start my own agency.”</p></div></div>
+        <div class="col-md-4"><div class="testimonial-card"><div class="d-flex align-items-center gap-3 mb-3"><img src="https://randomuser.me/api/portraits/men/67.jpg" alt="student"><div><h6 class="mb-0">Tunde A.</h6><small class="text-white-50">Entrepreneur</small></div></div><p class="small text-white-50">“The community and lifetime access are amazing. I've learned practical skills without any coding background.”</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="py-5">
+    <div class="container">
+      <h2 class="section-title mb-4">Frequently Asked Questions</h2>
+      <div class="faq-item"><h6><i class="fas fa-question-circle text-primary-custom me-2"></i>What is PROMISETECH ACADEMY?</h6><p class="small text-white-50">An online academy that teaches affiliate marketing, AI product creation, and digital business skills.</p></div>
+      <div class="faq-item"><h6><i class="fas fa-user-plus text-primary-custom me-2"></i>Who can enroll?</h6><p class="small text-white-50">Anyone interested in digital marketing, from beginners to intermediate learners.</p></div>
+      <div class="faq-item"><h6><i class="fas fa-question text-primary-custom me-2"></i>Do I need experience?</h6><p class="small text-white-50">No, the training is beginner-friendly and covers everything from scratch.</p></div>
+      <div class="faq-item"><h6><i class="fas fa-key text-primary-custom me-2"></i>How do I activate my account?</h6><p class="small text-white-50">Pay the activation fee of ₦3,000 to unlock your dashboard and materials.</p></div>
+      <div class="faq-item"><h6><i class="fas fa-clock text-primary-custom me-2"></i>When do I receive access?</h6><p class="small text-white-50">Immediately after successful activation, you'll get login details.</p></div>
+    </div>
+  </section>
+
+  <!-- CALL TO ACTION + PRICING -->
+  <section id="cta" class="py-5">
+    <div class="container">
+      <div class="text-center">
+        <h2 class="fw-bold display-6">Ready To Become A Digital Marketing Professional?</h2>
+        <p class="text-white-50 mb-5">Join hundreds of students learning practical digital marketing skills with PROMISETECH ACADEMY.</p>
+        <div class="pricing-card">
+          <h5 class="text-uppercase text-secondary-custom">Student Account Activation</h5>
+          <div class="price">₦3,000</div>
+          <ul class="list-unstyled mt-3 text-start">
+            <li><i class="fas fa-check text-secondary-custom me-2"></i>Lifetime Course Access</li>
+            <li><i class="fas fa-check text-secondary-custom me-2"></i>Student Dashboard</li>
+            <li><i class="fas fa-check text-secondary-custom me-2"></i>Learning Resources</li>
+            <li><i class="fas fa-check text-secondary-custom me-2"></i>Future Updates</li>
+          </ul>
+          <div class="d-grid gap-3 mt-4">
+            <a href="#" class="btn gradient-primary btn-glow py-3 rounded-pill fw-bold"><i class="fas fa-rocket me-2"></i>🚀 Activate Student Account</a>
+            <a href="#" class="btn btn-outline-light py-3 rounded-pill"><i class="fab fa-telegram me-2"></i>💬 Contact Us on Telegram</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="py-5 border-top border-secondary border-opacity-10">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-md-4">
+          <h5 class="fw-bold"><i class="fas fa-graduation-cap text-primary-custom me-2"></i>PROMISETECH ACADEMY</h5>
+          <p class="text-white-50 small">Learn Today • Build Tomorrow • Grow Forever</p>
+        </div>
+        <div class="col-md-8 footer-links d-flex flex-wrap justify-content-md-end gap-3">
+          <a href="#">About</a> <a href="#">Courses</a> <a href="#">Admissions</a> <a href="#">Contact</a> <a href="#">Telegram</a> <a href="#">Privacy</a> <a href="#">Terms</a>
+        </div>
+      </div>
+      <div class="text-center text-white-50 small mt-4 pt-3 border-top border-secondary border-opacity-10">Copyright © 2026 PROMISETECH ACADEMY</div>
+    </div>
+  </footer>
+
+  <!-- BOOTSTRAP JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    window.addEventListener('load', function() {
+      document.getElementById('loader').classList.add('hidden');
+    });
+    document.querySelectorAll('.counter-number').forEach(el => {
+      const target = parseInt(el.innerText);
+      let current = 0;
+      const step = Math.ceil(target / 60);
+      const timer = setInterval(() => {
+        current += step;
+        if (current >= target) { el.innerText = target; clearInterval(timer); }
+        else el.innerText = current;
+      }, 25);
+    });
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href'))?.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+  </script>
+</body>
+</html>
